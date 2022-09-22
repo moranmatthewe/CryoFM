@@ -12,4 +12,4 @@ This software tool performs calculations for cryogenic fluid management operatio
 
 The reference report can be found at www.moraninnovation.com.
 
-Please report any errata or other feedback to info@moraninnovation.com.
+Please report any errata or send other feedback to info@moraninnovation.com.
