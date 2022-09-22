@@ -8,8 +8,8 @@ Unless required by applicable law or agreed to in writing, software distributed 
 
 CryoFM(TM) is a trademark of Moran Innovation LLC. All rights reserved.
 
-HOW TO USE THIS INTERACTIVE NOTEBOOK: Use the table of contents icon and sidebar at the left to navigate to the topic of interest. Change any of the input values and run the cell code (see the menu above for run options).
+This software tool performs calculations for cryogenic fluid management operations, systems, and technologies.
 
-CAUTION: None of the code cells run automatically. The user must manually run selected code cells in sequence to achieve the desired results. Default units are SI.
+The reference report can be found at www.moraninnovation.com.
 
-The reference report for this interactive notebook can be found at www.moraninnovation.com. Please report any errata or other feedback to info@moraninnovation.com.
+Please report any errata or other feedback to info@moraninnovation.com.
