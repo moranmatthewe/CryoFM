@@ -1,6 +1,6 @@
 '''CryoFM(TM) is a library of functions useful for cryogenic fluid management. 
    Default units are SI. Copyright 2022 Moran Innovation LLC. Licensed under 
-   the Apache License, Version 2.0. Reference report can be accessed at: 
+   the Apache License, Version 2.0. The reference report can be accessed at: 
    https://drive.google.com/file/d/1sTNNPRgGdC4JrDt5UGz7pkyhoysBNkRZ/view'''
 
 
