@@ -41,3 +41,4 @@ def reynolds(fluid, velocity, length, temp, press):
     # Reynolds number, dimensionless
     return density * velocity * length / visc_dynamic
 
+# Raleigh number
