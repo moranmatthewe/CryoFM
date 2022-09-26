@@ -8,14 +8,15 @@ import CoolProp.CoolProp as CP
 
 
 # Practice setting up a new class
-class DimLess:
-    def__init__(self, name, inputs, properties, value)
-    self.name = name
-    self.inputs = inputs
-    self.properties = properties
-    self.value = value
+#class DimLess:
+#    def __init__(self, name, inputs, properties, value):
+#        self.name = name
+#        self.inputs = inputs[3]
+#        self.properties = properties[2]
+#        self.value = value
 
-Bo.name = DimLess.name('Bond')
+#Bo = DimLess('Bond',['fluid', 'accel', 'diam_fs','press'],['density_liquid, 
+#'density_vapor', 'surface_tension'], value )
 
 
 # Fluid properties
