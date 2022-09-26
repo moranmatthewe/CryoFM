@@ -7,6 +7,19 @@
 import CoolProp.CoolProp as CP
 
 
+# Practice setting up a new class
+class DimensionlessNumber:
+    def__init__(self, name, inputs, properties, value)
+    self.name = name
+    self.inputs = inputs
+    self.properties = properties
+    self.value = value
+
+Bo.name = DimensionlessNumber('Bond')
+Bo.inputs[0] = {'fluid': fluid}
+Bo.inputs[1] = {'accel': accel}
+
+
 # Fluid properties
 
 # List of commmon cryogenic fluids supported in CoolProp; full list at
