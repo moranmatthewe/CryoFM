@@ -8,16 +8,14 @@ import CoolProp.CoolProp as CP
 
 
 # Practice setting up a new class
-class DimensionlessNumber:
+class DimLess:
     def__init__(self, name, inputs, properties, value)
     self.name = name
     self.inputs = inputs
     self.properties = properties
     self.value = value
 
-Bo.name = DimensionlessNumber('Bond')
-Bo.inputs[0] = {'fluid': fluid}
-Bo.inputs[1] = {'accel': accel}
+Bo.name = DimLess.name('Bond')
 
 
 # Fluid properties
