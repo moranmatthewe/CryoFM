@@ -7,18 +7,6 @@
 import CoolProp.CoolProp as CP
 
 
-# Practice setting up a new class
-#class DimLess:
-#    def __init__(self, name, inputs, properties, value):
-#        self.name = name
-#        self.inputs = inputs[3]
-#        self.properties = properties[2]
-#        self.value = value
-
-#Bo = DimLess('Bond',['fluid', 'accel', 'diam_fs','press'],['density_liquid, 
-#'density_vapor', 'surface_tension'], value )
-
-
 # Fluid properties
 
 # List of commmon cryogenic fluids supported in CoolProp; full list at
