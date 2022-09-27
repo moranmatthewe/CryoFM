@@ -4,7 +4,7 @@
    https://drive.google.com/file/d/1sTNNPRgGdC4JrDt5UGz7pkyhoysBNkRZ/view'''
 
 
-import CoolProp.CoolProp as CP
+import CoolProp.CoolProp as cp
 
 
 # Fluid properties
@@ -16,17 +16,17 @@ def list_fluids():
             "OrthoHydrogen", "Oxygen", "Methane", "Nitrogen", "Helium", "Neon"]
 
 
-# Dimensionless numbers
+# -------- Dimensionless numbers------------ #
 
 # Bond number based on fluid, acceleration (m/s^2), free surface diameter (m), 
 # and pressure (Pa)
 def bond(fluid, accel, diam_fs, press):
     # saturated liquid density, kg/m^3
-    density_liquid = CP.PropsSI('D', 'P', press, 'Q', 0, fluid)
+    density_liquid = cp.PropsSI('D', 'P', press, 'Q', 0, fluid)
     # saturated vapor density, kg/m^3
-    density_vapor = CP.PropsSI('D', 'P', press, 'Q', 1, fluid)
+    density_vapor = cp.PropsSI('D', 'P', press, 'Q', 1, fluid)
     # saturated surface tension,  N/m  
-    surf_tension = CP.PropsSI('surface_tension', 'P', press, 'Q', 0, fluid)
+    surf_tension = cp.PropsSI('surface_tension', 'P', press, 'Q', 0, fluid)
     # Bond number, dimensionless 
     return (density_liquid - density_vapor) * accel * (diam_fs)**2 / surf_tension
 
@@ -35,9 +35,9 @@ def bond(fluid, accel, diam_fs, press):
 # fluid pressure (Pa)
 def reynolds(fluid, velocity, length, temp, press):
     # fluid density, kg/m^3
-    density = CP.PropsSI('D', 'T', temp, 'P', press, fluid)
+    density = cp.PropsSI('D', 'T', temp, 'P', press, fluid)
     # dynamic viscosity, Pa-s
-    visc_dynamic = CP.PropsSI('V', 'T', temp, 'P', press, fluid)  
+    visc_dynamic = cp.PropsSI('V', 'T', temp, 'P', press, fluid)  
     # Reynolds number, dimensionless
     return density * velocity * length / visc_dynamic
 
