@@ -33,12 +33,12 @@ def bond(fluid, accel, diam_fs, press):
 # Reynolds number based on fluid, velocity (m/s), characteristic length or
 # hydraulic diameter = 4*area/wetted perimeter (m), fluid temperature (K), and
 # fluid pressure (Pa)
-def reynolds(fluid, velocity, length, temp, press):
+def reynolds(fluid, velocity, diam, temp, press):
     # fluid density, kg/m^3
     density = cp.PropsSI('D', 'T', temp, 'P', press, fluid)
     # dynamic viscosity, Pa-s
     visc_dynamic = cp.PropsSI('V', 'T', temp, 'P', press, fluid)  
     # Reynolds number, dimensionless
-    return density * velocity * length / visc_dynamic
+    return density * velocity * diam / visc_dynamic
 
 # Raleigh number
