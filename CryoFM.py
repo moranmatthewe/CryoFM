@@ -30,7 +30,7 @@ def bond(fluid, accel, diam_fs, press):
     Keyword arguments:
     fluid -- fluid type supported by CoolProp
     accel -- local acceleration, m/s^2
-    diam_fs -- free surface diameter, m
+    diam_fs -- free surface diameter, m^2
     press -- vapor pressure, Pa
     """
     # saturated liquid density, kg/m^3
@@ -51,8 +51,8 @@ def reynolds(fluid, velocity, dim_char, temp, press):
     dim_char -- characteristic dimension, m
                 distance from leading edge for external flow, or
                 hydraulic diameter for internal flow (4*area/wetted perimeter)
-    temp -- fluid temperature (K)
-    press -- fluid pressure (Pa)
+    temp -- fluid temperature, K
+    press -- fluid pressure, Pa
     """
     # fluid density, kg/m^3
     density = cp.PropsSI('D', 'T', temp, 'P', press, fluid)
