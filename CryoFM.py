@@ -12,11 +12,11 @@ def bond(accel, diam_fs, dens_liq, dens_vap, surf_tens):
     """Bond number (ratio of acceleration to capillary forces)
     
     Keyword arguments:
-        accel -- local acceleration, m/s^2
-        diam_fs -- free surface diameter, m^2
-        dens_liq -- density of saturated liquid, kg/m^3
-        dens_vap -- density of saturated vapor, kg/m^3
-        surf_tens -- fluid surface tension, N/m
+    accel -- local acceleration, m/s^2
+    diam_fs -- free surface diameter, m^2
+    dens_liq -- density of saturated liquid, kg/m^3
+    dens_vap -- density of saturated vapor, kg/m^3
+    surf_tens -- fluid surface tension, N/m
     """
     return (dens_liq - dens_vap) * accel * (diam_fs)**2 / surf_tens
 
