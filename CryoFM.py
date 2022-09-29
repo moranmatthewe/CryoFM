@@ -7,58 +7,31 @@
    '''
 
 
-import CoolProp.CoolProp as cp
-
-
-# Fluid properties
-
-def list_fluids():
-    """Commmon cryogenic fluids list used by CoolProp
-    
-    Keyword Arguments: none
-    Ref: http://coolprop.org/fluid_properties/PurePseudoPure.html#list-of-fluids
-    """
-    return ["Common cryogenic fluids:", "ParaHydrogen", "Hydrogen", 
-            "OrthoHydrogen", "Oxygen", "Methane", "Nitrogen", "Helium", "Neon"]
-
-
 # Dimensionless numbers
 
-def bond(fluid, accel, diam_fs, press):
+def bond(accel, diam_fs, dens_liq, dens_vap, surf_tens):
     """Bond number (ratio of acceleration to capillary forces)
     
     Keyword arguments:
-    fluid -- fluid type supported by CoolProp
-    accel -- local acceleration, m/s^2
-    diam_fs -- free surface diameter, m^2
-    press -- vapor pressure, Pa
+        accel -- local acceleration, m/s^2
+        diam_fs -- free surface diameter, m^2
+        dens_liq -- density of saturated liquid, kg/m^3
+        dens_vap -- density of saturated vapor, kg/m^3
+        surf_tens -- fluid surface tension, N/m
     """
-    # saturated liquid density, kg/m^3
-    density_liquid = cp.PropsSI('D', 'P', press, 'Q', 0, fluid)
-    # saturated vapor density, kg/m^3
-    density_vapor = cp.PropsSI('D', 'P', press, 'Q', 1, fluid)
-    # saturated surface tension,  N/m  
-    surf_tension = cp.PropsSI('surface_tension', 'P', press, 'Q', 0, fluid)
-    # Bond number, dimensionless 
-    return (density_liquid - density_vapor) * accel * (diam_fs)**2 / surf_tension
+    return (dens_liq - dens_vap) * accel * (diam_fs)**2 / surf_tens
 
-def reynolds(fluid, velocity, dim_char, temp, press):
+def reynolds(velocity, dim_char, density, visc_dyn):
     """Reynolds number (ratio of inertia to viscous forces in a flowing fluid)
     
     Keyword arguments:
-    fluid -- fluid type supported by CoolProp
     velocity -- fluid velocity, m/s
     dim_char -- characteristic dimension, m
                 distance from leading edge for external flow, or
                 hydraulic diameter for internal flow (4*area/wetted perimeter)
-    temp -- fluid temperature, K
-    press -- fluid pressure, Pa
+    density -- fluid density, kg/m^3
+    visc_dyn -- dynamic viscosity, Pa-s
     """
-    # fluid density, kg/m^3
-    density = cp.PropsSI('D', 'T', temp, 'P', press, fluid)
-    # dynamic viscosity, Pa-s
-    visc_dynamic = cp.PropsSI('V', 'T', temp, 'P', press, fluid)  
-    # Reynolds number, dimensionless
-    return density * velocity * dim_char / visc_dynamic
+    return density * velocity * dim_char / visc_dyn
 
 # Raleigh number
