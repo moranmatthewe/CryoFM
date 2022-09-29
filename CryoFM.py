@@ -33,7 +33,7 @@ def reynolds(velocity, dim_char, density, visc_dyn):
     """
     return density * velocity * dim_char / visc_dyn
 
-def grashof(accel, cte, temp_surf, temp_bulk, dim_char, visc_dyn):
+def grashof(accel, cte, temp_surf, temp_bulk, dim_char, visc_kin):
     """Grashof number (ratio of buoyancy to viscous force)
     
     Keyword arguments:
@@ -47,7 +47,7 @@ def grashof(accel, cte, temp_surf, temp_bulk, dim_char, visc_dyn):
     visc_dyn -- dynamic viscosity, Pa-s
     """
     return (accel * cte * abs(temp_surf - temp_bulk) * dim_char**3
-            / visc_dyn**2)
+            / visc_kin**2)
 
 
 # Raleigh number
