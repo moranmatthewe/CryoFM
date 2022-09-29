@@ -33,4 +33,21 @@ def reynolds(velocity, dim_char, density, visc_dyn):
     """
     return density * velocity * dim_char / visc_dyn
 
+def grashof(accel, cte, temp_surf, temp_bulk, dim_char, visc_dyn):
+    """Grashof number (ratio of buoyancy to viscous force)
+    
+    Keyword arguments:
+    accel -- local acceleration, m/s^2
+    cte -- fluid coefficient of thermal expansion, 1/K (~1/T for ideal gas)
+    temp_surf -- surface temperature, K
+    temp_bulk -- bulk fluid temperature, K
+    dim_char -- characteristic dimension, m
+                vertical length for vertical flat plate, or
+                hydraulic diameter for internal flow (4*area/wetted perimeter)
+    visc_dyn -- dynamic viscosity, Pa-s
+    """
+    return (accel * cte * abs(temp_surf - temp_bulk) * dim_char**3
+            / visc_dyn**2)
+
+
 # Raleigh number
