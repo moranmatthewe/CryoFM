@@ -49,5 +49,13 @@ def grashof(accel, cte, temp_surf, temp_bulk, dim_char, visc_kin):
     return (accel * cte * abs(temp_surf - temp_bulk) * dim_char**3
             / visc_kin**2)
 
-
-# Raleigh number
+def jakob(cp_final, temp_final, temp_init, dh_final)
+    """Jakob number (ratio of sensible heat to latent heat during phase change)
+    
+    Keyword arguments:
+    cp_final -- specific heat at final conditions, J/kg-K
+    temp_final -- final fluid temperature, K
+    temp_init -- initial fluid temperature, K
+    dh_final -- latent heat of vaporization at final conditions, J/kg
+    """
+return cp_final * (temp_final- temp_init) / dh_final
