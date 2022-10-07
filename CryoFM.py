@@ -6,7 +6,7 @@
    Version 2.0. 
    '''
 
-# Dimensionless numbers
+# DIMENSIONLESS NUMBERS
 
 def bond(accel, diam_fs, dens_liq, dens_vap, surf_tens):
     """Bond number (ratio of acceleration to capillary forces)
@@ -49,7 +49,7 @@ def grashof(accel, cte, temp_surf, temp_bulk, dim_char, visc_kin):
     return (accel * cte * abs(temp_surf - temp_bulk) * dim_char**3
             / visc_kin**2)
 
-def jakob(cp_final, temp_final, temp_init, dh_final)
+def jakob(cp_final, temp_final, temp_init, dh_final):
     """Jakob number (ratio of sensible heat to latent heat during phase change)
     
     Keyword arguments:
@@ -58,4 +58,52 @@ def jakob(cp_final, temp_final, temp_init, dh_final)
     temp_init -- initial fluid temperature, K
     dh_final -- latent heat of vaporization at final conditions, J/kg
     """
-return cp_final * (temp_final- temp_init) / dh_final
+    return cp_final * (temp_final- temp_init) / dh_final
+
+def froude(veloc, accel, length_char):
+    """Froude number (ratio of the flow inertia to the external field)
+    
+    Keyword arguments:
+    veloc -- fluid velocity, m/s
+    accel -- local acceleration, m/s^2
+    length_char -- characteristic length, m
+    """
+    return veloc**2 / (accel * length_char)
+
+def froude_beta(veloc, accel, length_char, beta, dT):
+    """thermal expansion Froude number
+    
+    Keyword arguments:
+    veloc -- fluid velocity, m/s
+    accel -- local acceleration, m/s^2
+    length_char -- characteristic length, m
+    beta -- coefficient of thermal expansion, 1/k
+    dT -- temperature differential, K
+    """
+    return froude(veloc, accel, length_char) / (beta * dT)
+
+
+# PRESSURIZATION
+
+def press_mass_JaFr(tank_shape, jakob, froude, k=1, m_ref=1):
+    """ Pressurant mass prediction based on Ja & Fr correlation
+    
+    Keyword arguments:
+    tank_shape -- 'vertical cylinder', 'spherical', or 'horizontal cylinder'
+    jakob -- Jakob number
+    froude -- thermal expansion froude number
+    k -- pressurant mass equation constant (default 1.0)
+    mass_ref -- reference mass, kg (default 1.0)
+    """
+    # Validated ranges: 0.07<Ja<0.17 and 0.001<Fr<1.15
+    # Ref: Ludwig and Dreyer, Cryogenics 63 (2014) 1-16
+  
+    if(tank_shape=='vertical cylinder'):
+        m_cn = k * jakob**(3/2) / froude**(1/3)
+    elif(tank_shape=='spherical') and fill_fract>0.33 or fill_fract<0.66:
+        m_cn = k * jakob / froude**(1/3)
+    elif(tank_shape=='horizontal cylinder'):
+        m_cn = k * jakob / froude**(1/3)
+    else:
+        raise Exception("Tank geometry not supported")
+    return m_cn * m_ref
