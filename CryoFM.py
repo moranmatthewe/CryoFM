@@ -85,7 +85,7 @@ def froude_beta(veloc, accel, length_char, beta, dT):
 
 # PRESSURIZATION
 
-def press_mass_JaFr(tank_shape, jakob, froude, k=1, m_ref=1):
+def press_mass_JaFr(int_longdim, height_ullage, jakob, froude, k=1, m_ref=1):
     """ Pressurant mass prediction based on Ja & Fr correlation
     
     Keyword arguments:
@@ -98,12 +98,8 @@ def press_mass_JaFr(tank_shape, jakob, froude, k=1, m_ref=1):
     # Validated ranges: 0.07<Ja<0.17 and 0.001<Fr<1.15
     # Ref: Ludwig and Dreyer, Cryogenics 63 (2014) 1-16
   
-    if(tank_shape=='vertical cylinder'):
+    if(int_longdim/height_ullage < 2):
         m_cn = k * jakob**(3/2) / froude**(1/3)
-    elif(tank_shape=='spherical') and fill_fract>0.33 or fill_fract<0.66:
+    else:  # modified equation for larger surface area
         m_cn = k * jakob / froude**(1/3)
-    elif(tank_shape=='horizontal cylinder'):
-        m_cn = k * jakob / froude**(1/3)
-    else:
-        raise Exception("Tank geometry not supported")
     return m_cn * m_ref
