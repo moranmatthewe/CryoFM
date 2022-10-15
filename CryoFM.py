@@ -8,17 +8,17 @@
 
 # DIMENSIONLESS NUMBERS
 
-def bond(accel, diam_fs, dens_liq, dens_vap, surf_tens):
+def bond(accel, radius_fs, dens_liq, dens_vap, surf_tens):
     """Bond number (ratio of acceleration to capillary forces)
     
     Keyword arguments:
     accel -- local acceleration, m/s^2
-    diam_fs -- free surface diameter, m^2
+    radius_fs -- free surface radius, m^2
     dens_liq -- density of saturated liquid, kg/m^3
     dens_vap -- density of saturated vapor, kg/m^3
     surf_tens -- fluid surface tension, N/m
     """
-    return (dens_liq - dens_vap) * accel * (diam_fs)**2 / surf_tens
+    return (dens_liq - dens_vap) * accel * (radius_fs)**2 / surf_tens
 
 def reynolds(velocity, dim_char, density, visc_dyn):
     """Reynolds number (ratio of inertia to viscous forces in a flowing fluid)
