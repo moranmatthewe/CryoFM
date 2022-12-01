@@ -6,6 +6,8 @@
    Version 2.0. 
    '''
 
+import math
+
 # DIMENSIONLESS NUMBERS
 
 def bond(accel, radius_fs, dens_liq, dens_vap, surf_tens):
@@ -82,7 +84,6 @@ def froude_beta(veloc, accel, length_char, beta, dT):
     """
     return froude(veloc, accel, length_char) / (beta * dT)
 
-
 # PRESSURIZATION
 
 def press_mass_JaFr(int_longdim, height_ullage, jakob, froude, k=1, m_ref=1):
@@ -103,3 +104,14 @@ def press_mass_JaFr(int_longdim, height_ullage, jakob, froude, k=1, m_ref=1):
     else:  # modified equation for larger surface area
         m_cn = k * jakob / froude**(1/3)
     return m_cn * m_ref
+
+# TANK GEOMETRIES
+
+def sphere_area_inter(radius, height_liq):
+    """ Interface area based on liquid height in spherical tank
+
+    Keyword arguments:
+    radius -- spherical tank internal radius
+    height_liq -- liquid height from tank bottom
+    """
+    return math.pi * (2 * radius - height_liq) * height_liq
