@@ -73,7 +73,7 @@ def froude(veloc, accel, length_char):
     return veloc**2 / (accel * length_char)
 
 def froude_beta(veloc, accel, length_char, beta, dT):
-    """thermal expansion Froude number
+    """Thermal expansion Froude number
     
     Keyword arguments:
     veloc -- fluid velocity, m/s
@@ -87,7 +87,7 @@ def froude_beta(veloc, accel, length_char, beta, dT):
 # PRESSURIZATION
 
 def press_mass_JaFr(int_longdim, height_ullage, jakob, froude, k=1, m_ref=1):
-    """ Pressurant mass prediction based on Ja & Fr correlation
+    """Pressurant mass prediction based on Ja & Fr correlation
     
     Keyword arguments:
     tank_shape -- 'vertical cylinder', 'spherical', or 'horizontal cylinder'
@@ -98,12 +98,50 @@ def press_mass_JaFr(int_longdim, height_ullage, jakob, froude, k=1, m_ref=1):
     """
     # Validated ranges: 0.07<Ja<0.17 and 0.001<Fr<1.15
     # Ref: Ludwig and Dreyer, Cryogenics 63 (2014) 1-16
-  
     if(int_longdim/height_ullage < 2):
         m_cn = k * jakob**(3/2) / froude**(1/3)
     else:  # modified equation for larger surface area
         m_cn = k * jakob / froude**(1/3)
     return m_cn * m_ref
+
+# SLOSHING
+
+def slosh_nusselt(slosh_reynolds, reynolds_crit=4000.):
+    """Sloshing Nusselt number
+    
+    Keyword arguments:
+    slosh_reynolds -- sloshing Reynolds number
+    reynolds_crit -- critical sloshing Reynolds number (default 4000.)
+    """
+    # Ref: Ludwig, et al., Intl J of Heat and Mass Transfer 66 (2013) 223-234
+    return (slosh_reynolds/reynolds_crit)**0.69
+
+def slosh_jakob(dens_liq, cp_liq, temp_sat, temp_liq, dens_vapsat, 
+                latent_heat):
+    """Sloshing Jakob number
+    
+    Keyword arguments:
+    dens_liq -- density at bulk liquid temp and press
+    cp_liq -- specific heat at constant pressure at bulk liquid temp and press
+    temp_sat -- saturation temperature at vapor pressure
+    temp_liq -- temperature of bulk liquid
+    dens_vapsat -- density of saturated vapor
+    latent_heat -- latent heat of vaporization
+    """
+    # Ref: Ludwig, et al., Intl J of Heat and Mass Transfer 66 (2013) 223-234
+    return (dens_liq * cp_liq * (temp_sat - temp_liq)/ dens_vapsat
+            / latent_heat)
+
+def slosh_reynolds(ang_wave_freq, wave_height, visc_kinliq):
+    """Sloshing Reynolds number
+    
+    Keyword arguments:
+    ang_wave_freq -- angular wave frequency (2*pi*frequency)
+    wave_height -- wave height (amplitude) during sloshing
+    visc_kinliq -- kinematic viscosity at bulk liquid temp and press
+    """
+    # Ref: Ludwig, et al., Intl J of Heat and Mass Transfer 66 (2013) 223-234
+    return ang_wave_freq * wave_height**2 / visc_kinliq
 
 # TANK GEOMETRIES
 
