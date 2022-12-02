@@ -153,6 +153,16 @@ def slosh_reynolds(ang_wave_freq, wave_height, visc_kinliq):
     # Ref: Ludwig, et al., Intl J of Heat and Mass Transfer 66 (2013) 223-234
     return ang_wave_freq * wave_height**2 / visc_kinliq
 
+def tslosh_delta(grad_init,nusselt_slosh,diffus_sat):
+    """Time prior to slosh when initial thermal gradient is set up in liquid
+    
+    Keyword arguments:
+    grad_init -- initial thermal boundary layer gradient thickness (liquid)
+    nusselt_slosh -- sloshing nusselt number
+    diffus_sat -- saturated liquid diffusivity"""
+    # Ref: Ludwig, et al., Intl J of Heat and Mass Transfer 66 (2013) 223-234
+    return grad_init**2 / (math.pi * nusselt_slosh * diffus_sat)
+
 # TANK GEOMETRIES
 
 def sphere_area_inter(radius, height_liq):
