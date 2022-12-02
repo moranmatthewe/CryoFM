@@ -118,6 +118,7 @@ def init_grad_thick(diffus_sat, time):
 
 def slosh_condense_vel(nusselt_slosh, diffus_sat, jakob, time, delta_tslosh):
     """Condensation velocity at interface during sloshing
+
     Keyword arguments:
     nusselt_slosh -- sloshing nusselt number
     diffus_sat -- saturated liquid diffusivity
@@ -154,6 +155,18 @@ def slosh_nusselt(slosh_reynolds, reynolds_crit=4000.):
     """
     # Ref: Ludwig, et al., Intl J of Heat and Mass Transfer 66 (2013) 223-234
     return (slosh_reynolds/reynolds_crit)**0.69
+
+def slosh_pressure(press_init, temp_vap, temp_vap_init, gasconstsp, 
+                   density_vapsat, volume_ullage, jakob, area_inter, 
+                   nusselt_slosh, diffus_sat, slosh_time, delta_tslosh,
+                   evap_vel):
+    """Pressure as a function of elapsed slosh time"""
+     # Ref: Ludwig, et al., Intl J of Heat and Mass Transfer 66 (2013) 223-234
+    return (press_init * temp_vap / temp_vap_init - gasconstsp
+            * temp_vap_init * density_vapsat / volume_ullage * (2 * jakob
+            * area_inter * math.sqrt(nusselt_slosh * diffus_sat)
+            / math.sqrt(math.pi) * (math.sqrt(slosh_time + delta_tslosh)
+            - math.sqrt(delta_tslosh)) - evap_vel * area_inter * slosh_time))
 
 def slosh_reynolds(ang_wave_freq, wave_height, visc_kinliq):
     """Sloshing Reynolds number
