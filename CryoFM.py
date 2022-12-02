@@ -106,6 +106,16 @@ def press_mass_JaFr(int_longdim, height_ullage, jakob, froude, k=1, m_ref=1):
 
 # SLOSHING
 
+def init_grad_thick(diffus_sat, time):
+    """Initial thermal boundary layer gradient thickness (liquid)
+    
+    Keyword arguments:
+    diffus_sat -- saturated liquid diffusivity
+    time -- elapsed time from start of ramp pressurization to slosh start
+    """
+    # Ref: Ludwig, et al., Intl J of Heat and Mass Transfer 66 (2013) 223-234
+    return math.sqrt(math.pi * diffus_sat * time)
+
 def slosh_nusselt(slosh_reynolds, reynolds_crit=4000.):
     """Sloshing Nusselt number
     
