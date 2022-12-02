@@ -116,15 +116,18 @@ def init_grad_thick(diffus_sat, time):
     # Ref: Ludwig, et al., Intl J of Heat and Mass Transfer 66 (2013) 223-234
     return math.sqrt(math.pi * diffus_sat * time)
 
-def slosh_nusselt(slosh_reynolds, reynolds_crit=4000.):
-    """Sloshing Nusselt number
-    
+def slosh_condense_vel(nusselt_slosh, diffus_sat, jakob, time, delta_tslosh):
+    """Condensation velocity at interface during sloshing
     Keyword arguments:
-    slosh_reynolds -- sloshing Reynolds number
-    reynolds_crit -- critical sloshing Reynolds number (default 4000.)
+    nusselt_slosh -- sloshing nusselt number
+    diffus_sat -- saturated liquid diffusivity
+    jakob -- sloshing jakob number
+    time -- elapsed time from start of slosh
+    delta_tslosh -- ime prior to slosh when initial thermal gradient is set up
     """
     # Ref: Ludwig, et al., Intl J of Heat and Mass Transfer 66 (2013) 223-234
-    return (slosh_reynolds/reynolds_crit)**0.69
+    return -nusselt_slosh * diffus_sat * jakob / (math.sqrt(math.pi
+                * nusselt_slosh * diffus_sat * (slosh_time + delta_tslosh)))
 
 def slosh_jakob(dens_liq, cp_liq, temp_sat, temp_liq, dens_vapsat, 
                 latent_heat):
@@ -141,6 +144,16 @@ def slosh_jakob(dens_liq, cp_liq, temp_sat, temp_liq, dens_vapsat,
     # Ref: Ludwig, et al., Intl J of Heat and Mass Transfer 66 (2013) 223-234
     return (dens_liq * cp_liq * (temp_sat - temp_liq)/ dens_vapsat
             / latent_heat)
+
+def slosh_nusselt(slosh_reynolds, reynolds_crit=4000.):
+    """Sloshing Nusselt number
+    
+    Keyword arguments:
+    slosh_reynolds -- sloshing Reynolds number
+    reynolds_crit -- critical sloshing Reynolds number (default 4000.)
+    """
+    # Ref: Ludwig, et al., Intl J of Heat and Mass Transfer 66 (2013) 223-234
+    return (slosh_reynolds/reynolds_crit)**0.69
 
 def slosh_reynolds(ang_wave_freq, wave_height, visc_kinliq):
     """Sloshing Reynolds number
