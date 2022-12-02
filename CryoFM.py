@@ -146,6 +146,15 @@ def slosh_jakob(dens_liq, cp_liq, temp_sat, temp_liq, dens_vapsat,
     return (dens_liq * cp_liq * (temp_sat - temp_liq)/ dens_vapsat
             / latent_heat)
 
+def slosh_maxdp_time(freq, freq1):
+    """Sloshing elapsed time when maximum dP/dt occurs
+    
+    Keyword arguments:
+    freq -- lateral slosh frequency imposed
+    freq1 -- first mode natural frequency of tank at current liquid height
+    """
+    return 1 / abs(freq - freq1)
+    
 def slosh_nusselt(slosh_reynolds, reynolds_crit=4000.):
     """Sloshing Nusselt number
     
@@ -160,7 +169,23 @@ def slosh_pressure(press_init, temp_vap, temp_vap_init, gasconstsp,
                    density_vapsat, volume_ullage, jakob, area_inter, 
                    nusselt_slosh, diffus_sat, slosh_time, delta_tslosh,
                    evap_vel):
-    """Pressure as a function of elapsed slosh time"""
+    """Pressure as a function of elapsed slosh time
+    
+    Keyword arguments:
+    press_init -- initial pressure at start of sloshing
+    temp_vap -- temperature of bulk vapor at current slosh time
+    temp_vap_init -- initial temperatur of bulk vapor at slosh start
+    gasconstsp -- specific gas constant for fluid
+    density_vapsat -- density of saturated vapor
+    volume_ullage -- ullage volume (1 - liquid volume)
+    jakob -- sloshing jakob number
+    area_inter -- liquid interface area
+    nusselt slosh -- sloshing Nusselt number
+    diffus_sat -- diffusivity of saturated liquid
+    slosh_time -- elapsed time since start of sloshing
+    delta_tslosh -- time prior to slosh when initial thermal gradient is set up
+    evap_vel -- evaporation velocity at interface during sloshing
+    """
      # Ref: Ludwig, et al., Intl J of Heat and Mass Transfer 66 (2013) 223-234
     return (press_init * temp_vap / temp_vap_init - gasconstsp
             * temp_vap_init * density_vapsat / volume_ullage * (2 * jakob
