@@ -115,7 +115,8 @@ def init_grad_thick(diffus_sat, time):
     # Ref: Ludwig, et al., Intl J of Heat and Mass Transfer 66 (2013) 223-234
     return math.sqrt(math.pi * diffus_sat * time)
 
-def slosh_condense_vel(nusselt_slosh, diffus_sat, jakob, time, delta_tslosh):
+def slosh_condense_vel(nusselt_slosh, diffus_sat, jakob, slosh_time, 
+                       delta_tslosh):
     """Condensation velocity at interface during sloshing
 
     Keyword arguments:
