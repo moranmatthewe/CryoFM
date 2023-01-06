@@ -10,4 +10,5 @@ CryoFM(TM) is a trademark of Moran Innovation LLC. All rights reserved.
 
 These software tools perform calculations for cryogenic fluid management operations, systems, and technologies. The reference report can be found at www.moraninnovation.com. Please report any errata or send other feedback to info@moraninnovation.com.
 
+To invoke an interactive instance of the files in the repository, click on this Binder link: 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/moranmatthewe/CryoFM/HEAD)

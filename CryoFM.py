@@ -217,7 +217,7 @@ def tslosh_delta(grad_init,nusselt_slosh,diffus_sat):
 # TANK GEOMETRIES
 
 def sphere_area_inter(radius, height_liq):
-    """ Interface area based on liquid height in spherical tank
+    """Interface area based on liquid height in spherical tank
 
     Keyword arguments:
     radius -- spherical tank internal radius
