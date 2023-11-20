@@ -237,3 +237,5 @@ def sphere_area_inter(radius, height_liq):
     height_liq -- liquid height from tank bottom
     """
     return math.pi * (2 * radius - height_liq) * height_liq
+
+# ADD NEW CATEGORY HERE...
