@@ -58,7 +58,7 @@ def grashof(accel, cte, temp_surf, temp_bulk, dim_char, visc_kin):
     dim_char -- characteristic dimension, m
                 vertical length for vertical flat plate, or
                 hydraulic diameter for internal flow (4*area/wetted perimeter)
-    visc_dyn -- dynamic viscosity, Pa-s
+    visc_kin -- dynamic viscosity, m^2/s
     """
     return (accel * cte * abs(temp_surf - temp_bulk) * dim_char**3
             / visc_kin**2)
